@@ -17,11 +17,11 @@ install:
 
 install-test:
 	pip install -e . && \
-	pip install -r $(CURDIR)/test/requirements.txt && \
+	pip install -r $(CURDIR)/tests/requirements.txt && \
 	python setup.py build_ext --inplace
 
 run-test:
-	@pytest $(CURDIR)/test/ -vv --color=yes
+	@pytest $(CURDIR)/tests/ -vv --color=yes
 
 validate:
 	@echo "Running flake8"
@@ -37,7 +37,7 @@ build-package:
 	@python -m build
 
 coverage:
-	@pytest --cov-report=html --cov=$(CURDIR)/test/ -vv --color=yes
+	@pytest --cov-report=html --cov=$(CURDIR)/tests/ -vv --color=yes
 
 run-test-full:
 	validate
