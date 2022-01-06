@@ -1,15 +1,7 @@
 #!/usr/bin/env make -f
 
-IGNORES =
-IGNORES += "$(CURDIR)/.*"
-# Add ignores below like IGNORES += "pattern"
-
-# Add ignores above
-EMPTY:=
-SPACE:=$(EMPTY) $(EMPTY)
-IGNORES_ARGS = $(subst ${SPACE}, -not -path ,${IGNORES})
-
-FILES_PY = $(shell find $(CURDIR) -type f -name "*.py" $(IGNORES_ARGS))
+# Find all PY files except those in hidden folders. TODO: make this list extendable
+FILES_PY = $(shell find $(CURDIR) -type f -name "*.py" -not -path "$(CURDIR)/.**/**" -not -path "$(CURDIR)/build/**")
 
 install:
 	python -m pip install -e . && \
@@ -34,25 +26,14 @@ validate:
 	@safety check --bare
 
 build-package:
-	@python -m build
+	@python setup.py bdist_wheel
 
 coverage:
 	@pytest --cov-report=html --cov=$(CURDIR)/tests/ -vv --color=yes
 
-run-test-full:
-	validate
-	run-test
-	coverage
+run-test-full: validate run-test
 
 docker-validate:
 	@docker build -t test-build --build-arg ENV=TEST $(CURDIR)
-	@docker run --exec --rm test-build:latest make run-test-full
+	@docker run --rm --entrypoint /usr/bin/make test-build:latest run-test-full
 	@docker image rm test-build
-
-echo-files-debug:
-	@echo "ignore args"
-	@echo $(IGNORES_ARG)
-	@echo "find command"
-	@echo "shell find $(CURDIR) -type f -name "*.py" $(IGNORES_ARG)"
-	@echo "all files"
-	@echo $(FILES_PY)
