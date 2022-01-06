@@ -45,8 +45,9 @@ run-test-full:
 	coverage
 
 docker-validate:
-	@docker build -t test-build $(CURDIR)
+	@docker build -t test-build --build-arg ENV=TEST $(CURDIR)
 	@docker run --exec --rm test-build:latest make run-test-full
+	@docker image rm test-build
 
 echo-files-debug:
 	@echo "ignore args"
