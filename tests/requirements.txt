@@ -1,0 +1,14 @@
+build
+flake8
+pylint
+mypy
+pycodestyle
+autopep8
+coverage
+ipython
+twine
+safety
+pytest
+pytest_cov
+
+# add custom test requirements BELOW this line

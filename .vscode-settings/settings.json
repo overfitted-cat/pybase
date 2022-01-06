@@ -1,0 +1,41 @@
+{
+  "[python]": {
+    "editor.tabSize": 4,
+    "editor.rulers": [
+      79
+    ],
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.formatOnSave": true,
+    "editor.insertSpaces": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true
+    }
+  },
+  "[json]": {
+    "editor.quickSuggestions": {
+      "strings": true
+    },
+    "editor.suggest.insertMode": "replace",
+    "editor.formatOnSave": true
+  },
+  "python.linting.pylintArgs": [],
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2,
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "files.watcherExclude": {
+    "**/.output/**": true
+  },
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/__pycache__": true
+  },
+  "git.ignoreLimitWarning": true,
+  "[markdown]": {
+    "files.trimTrailingWhitespace": false
+  }
+}

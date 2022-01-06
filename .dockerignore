@@ -128,4 +128,8 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# Edit below this line
+# Editors
+.vscode
+.idea
+
+# Edit Below this LINE:
