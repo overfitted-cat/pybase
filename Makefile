@@ -13,7 +13,7 @@ install-test:
 	python setup.py build_ext --inplace
 
 run-test:
-	@pytest $(CURDIR)/tests/ -vv --color=yes
+	@pytest $(CURDIR)/tests/ -vv --color=yes || [ $$? -eq 5 ] && exit 0 || exit $$?
 
 validate:
 	@echo "Running flake8"
@@ -29,7 +29,7 @@ build-package:
 	@python setup.py bdist_wheel
 
 coverage:
-	@pytest --cov-report=html --cov=$(CURDIR)/tests/ -vv --color=yes
+	@pytest --cov-report=html --cov=$(CURDIR)/tests/ -vv --color=yes || [ $$? -eq 5 ] && exit 0 || exit $$?
 
 run-test-full: validate run-test
 
